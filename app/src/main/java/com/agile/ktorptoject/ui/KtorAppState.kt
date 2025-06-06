@@ -24,7 +24,7 @@ class AppState(
 ) {
     fun navigateToUserDetail(userId: Int, from: NavBackStackEntry) {
         if (from.lifecycleIsResumed()) {
-            navController.navigate(com.agile.ktorptoject.ui.Screen.UserDetail.createRoute(userId))
+            navController.navigate(Screen.UserDetail.createRoute(userId))
         }
     }
 

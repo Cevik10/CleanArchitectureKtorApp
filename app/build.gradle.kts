@@ -79,6 +79,8 @@ dependencies {
     implementation(libs.ktor.client.android) // Android için Ktor istemcisi
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.serialization.kotlinx.json)
+    implementation(libs.ktor.client.logging) // versiyonu diğer Ktor versiyonlarına göre uyumlu yap
+
 
     implementation(project(":domain"))
     implementation(project(":data"))

@@ -14,6 +14,7 @@ fun UserDetailScreenBackground(
     modifier: Modifier = Modifier,
     content: @Composable BoxScope.() -> Unit,
 ) {
+
     Box(
         modifier = modifier
             .background(MaterialTheme.colorScheme.background)
@@ -25,4 +26,5 @@ fun UserDetailScreenBackground(
         )
         content()
     }
+
 }

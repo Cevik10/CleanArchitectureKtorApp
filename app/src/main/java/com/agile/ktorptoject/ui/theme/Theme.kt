@@ -11,33 +11,39 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
+
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = BluePrimary,
+    secondary = BlueSecondary,
+    tertiary = BlueTertiary,
+    background = DarkBackground,
+    surface = DarkSurface,
+    onPrimary = Black,
+    onSecondary = Black,
+    onTertiary = Black,
+    onBackground = DarkOnSurface,
+    onSurface = DarkOnSurface
 )
+
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    primary = BluePrimary,
+    secondary = BlueSecondary,
+    tertiary = BlueTertiary,
+    background = GrayBackground,
+    surface = GraySurface,
+    onPrimary = White,
+    onSecondary = White,
+    onTertiary = White,
+    onBackground = GrayOnSurface,
+    onSurface = GrayOnSurface
 )
 
+
 @Composable
-fun KtorPtojectTheme(
+fun KtorProjectTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
