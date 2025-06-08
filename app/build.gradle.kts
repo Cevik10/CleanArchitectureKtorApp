@@ -65,8 +65,10 @@ dependencies {
     implementation(libs.bundles.composeAdditional)
     implementation(libs.bundles.navigation)
     implementation(libs.bundles.hilt)
+//    implementation(libs.bundles.datastore)
     implementation(libs.bundles.otherLibraries)
     implementation(libs.bundles.retrofit)
+    implementation(libs.bundles.datastore)
     implementation(libs.androidx.media3.session)
     kapt(libs.bundles.hiltKapt)
     annotationProcessor(libs.hiltCompiler)
@@ -81,8 +83,12 @@ dependencies {
     implementation(libs.ktor.serialization.kotlinx.json)
     implementation(libs.ktor.client.logging) // versiyonu diğer Ktor versiyonlarına göre uyumlu yap
 
+    implementation ("androidx.compose.material3:material3:1.2.0")
+    implementation( "androidx.compose.material3:material3-window-size-class:1.2.0" )// Opsiyonel
 
     implementation(project(":domain"))
     implementation(project(":data"))
     implementation(project(":common"))
+
+
 }

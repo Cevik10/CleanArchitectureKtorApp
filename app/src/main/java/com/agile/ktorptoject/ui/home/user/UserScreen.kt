@@ -2,6 +2,7 @@ package com.agile.ktorptoject.ui.home.user
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -13,6 +14,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -65,13 +70,11 @@ fun UserScreen(
                 modifier = modifier.padding(contentPadding),
                 uiState = uiState,
                 onNavigateToUserDetail = onNavigateToUserDetail,
-                onRetry = viewModel::fetchUsers
+                onRetry = viewModel::fetchUsers,
+                onRefresh = viewModel::refreshUsers
             )
         }
-
     }
-
-
 }
 
 @Composable
@@ -96,16 +99,22 @@ fun UserItem(modifier: Modifier = Modifier, user: User, onClick: (Int) -> Unit) 
             )
         }
     }
-
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun UserScreenContent(
     modifier: Modifier = Modifier,
     uiState: UiState<List<User>>,
     onNavigateToUserDetail: (Int) -> Unit,
-    onRetry: () -> Unit
+    onRetry: () -> Unit,
+    onRefresh: () -> Unit
 ) {
+    val pullRefreshState = rememberPullRefreshState(
+        refreshing = uiState is UiState.Loading,
+        onRefresh = onRefresh
+    )
+
     Column(modifier = modifier.fillMaxSize()) {
         when (uiState) {
             is UiState.Loading -> {
@@ -113,12 +122,23 @@ fun UserScreenContent(
             }
 
             is UiState.Success -> {
-                LazyColumn {
-                    items(uiState.data) { user ->
-                        UserItem(user = user) {
-                            onNavigateToUserDetail(it)
+                Box(modifier = Modifier.fillMaxSize()) {
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .pullRefresh(pullRefreshState)
+                    ) {
+                        items(uiState.data) { user ->
+                            UserItem(user = user) {
+                                onNavigateToUserDetail(it)
+                            }
                         }
                     }
+                    PullRefreshIndicator(
+                        refreshing = false,
+                        state = pullRefreshState,
+                        modifier = Modifier.align(Alignment.TopCenter)
+                    )
                 }
             }
 
@@ -142,4 +162,3 @@ fun UserScreenContent(
         }
     }
 }
-

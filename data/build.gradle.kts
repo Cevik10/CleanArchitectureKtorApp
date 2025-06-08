@@ -47,16 +47,19 @@ dependencies {
     implementation(libs.androidxAppcompat)
     implementation(libs.bundles.retrofit)
     implementation(libs.bundles.hilt)
-    implementation(libs.bundles.datastore)
-    kapt(libs.bundles.hiltKapt)
     annotationProcessor(libs.hiltCompiler)
     testImplementation(libs.bundles.testing)
     androidTestImplementation(libs.bundles.testing)
 
     implementation(libs.ktor.client.core)
-    implementation(libs.ktor.client.android) // Android için Ktor istemcisi
+    implementation(libs.ktor.client.android)
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.serialization.kotlinx.json)
-    implementation(libs.ktor.client.logging) // versiyonu diğer Ktor versiyonlarına göre uyumlu yap
+    implementation(libs.ktor.client.logging)
+
+    implementation("androidx.datastore:datastore:1.1.1")
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
+    implementation("androidx.datastore:datastore-preferences-core:1.1.1")
+    implementation("androidx.core:core-ktx:1.9.0@aar")
 
 }
